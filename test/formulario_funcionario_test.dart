@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:ponto_eletronico/formulario_funcionario.dart';
 import 'package:ponto_eletronico/models.dart';
 

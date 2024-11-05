@@ -32,8 +32,8 @@ class _MyAppState extends State<MyApp> {
       List<dynamic> funcionariosList = jsonDecode(funcionariosJson);
       setState(() {
         funcionarios = funcionariosList
-            .map((funcionarioMap) => Funcionario(
-                nome: funcionarioMap['nome'], administradores: []))
+            .map((funcionarioMap) =>
+                Funcionario(nome: funcionarioMap['nome'], administradores: []))
             .toList();
       });
     }
@@ -42,9 +42,8 @@ class _MyAppState extends State<MyApp> {
   // Salvar funcionários em shared_preferences
   void _saveFuncionarios() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<Map<String, dynamic>> funcionariosMap = funcionarios
-        .map((funcionario) => {'nome': funcionario.nome})
-        .toList();
+    List<Map<String, dynamic>> funcionariosMap =
+        funcionarios.map((funcionario) => {'nome': funcionario.nome}).toList();
     String funcionariosJson = jsonEncode(funcionariosMap);
     prefs.setString('funcionarios', funcionariosJson);
   }
@@ -59,15 +58,16 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
-        '/listagem': (context) => ListagemFuncionarios(funcionarios: funcionarios),
+        '/listagem': (context) =>
+            ListagemFuncionarios(funcionarios: funcionarios),
         '/formulario': (context) => FormularioFuncionario(
-          onAddFuncionario: (funcionario) {
-            setState(() {
-              funcionarios.add(funcionario);
-              _saveFuncionarios();
-            });
-          },
-        ),
+              onAddFuncionario: (funcionario) {
+                setState(() {
+                  funcionarios.add(funcionario);
+                  _saveFuncionarios();
+                });
+              },
+            ),
       },
     );
   }
