@@ -1,30 +1,35 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:ponto_eletronico/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'package:ponto_eletronico/formulario_funcionario.dart';
+import 'package:ponto_eletronico/models.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  TestWidgetsFlutterBinding.ensureInitialized();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  group('Formulário de Funcionário Widget Test', () {
+    testWidgets('Deve adicionar um novo funcionário',
+        (WidgetTester tester) async {
+      SharedPreferences.setMockInitialValues({});
+      await tester.pumpWidget(MaterialApp(
+        home: FormularioFuncionario(
+          onAddFuncionario: (Funcionario funcionario) {
+            // Aqui você pode adicionar lógica para manipular o funcionário
+          },
+        ),
+      ));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      // Preencher o campo de texto
+      await tester.enterText(find.byType(TextFormField), 'Pedro');
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      // Clicar no botão "Salvar"
+      await tester.tap(find.text('Salvar'));
+      await tester.pump(); // Atualizar a árvore de widgets
+
+      // Verificar se a ação do botão resultou em um snackbar
+      expect(find.byType(SnackBar), findsOneWidget);
+      expect(find.text('Funcionário adicionado!'), findsOneWidget);
+    });
   });
 }
