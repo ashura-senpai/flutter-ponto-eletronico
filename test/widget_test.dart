@@ -13,9 +13,7 @@ void main() {
       SharedPreferences.setMockInitialValues({});
       await tester.pumpWidget(MaterialApp(
         home: FormularioFuncionario(
-          onAddFuncionario: (Funcionario funcionario) {
-            // lógica para manipular o funcionário
-          },
+          onAddFuncionario: (Funcionario funcionario) {},
         ),
       ));
 

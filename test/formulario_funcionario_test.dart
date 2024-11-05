@@ -10,33 +10,25 @@ void main() {
   group('Formulário de Funcionário Tests', () {
     testWidgets('Deve adicionar um novo funcionário e exibir SnackBar',
         (WidgetTester tester) async {
-      // Inicializa as SharedPreferences em modo de teste
       SharedPreferences.setMockInitialValues({});
 
-      // Variável para armazenar o funcionário adicionado
       Funcionario? funcionarioAdicionado;
 
-      // Cria um Widget de teste com o Formulário de Funcionário
       await tester.pumpWidget(MaterialApp(
         home: FormularioFuncionario(
           onAddFuncionario: (Funcionario funcionario) {
-            funcionarioAdicionado =
-                funcionario; // Armazena o funcionário adicionado
+            funcionarioAdicionado = funcionario;
           },
         ),
       ));
 
-      // Preencher o campo de texto
       await tester.enterText(find.byType(TextFormField), 'João');
 
-      // Clicar no botão "Salvar"
       await tester.tap(find.text('Salvar'));
-      await tester.pump(); // Atualiza a árvore de widgets
+      await tester.pump();
 
-      // Verifica se o funcionário foi adicionado corretamente
       expect(funcionarioAdicionado?.nome, 'João');
 
-      // Verifica se um SnackBar é exibido com a mensagem correta
       expect(find.byType(SnackBar), findsOneWidget);
       expect(find.text('Funcionário adicionado!'), findsOneWidget);
     });
@@ -55,14 +47,11 @@ void main() {
         ),
       ));
 
-      // Clicar no botão "Salvar" sem preencher o campo
       await tester.tap(find.text('Salvar'));
-      await tester.pump(); // Atualiza a árvore de widgets
+      await tester.pump();
 
-      // Verifica se o funcionário não foi adicionado
       expect(funcionarioAdicionado, isNull);
 
-      // Verifica se um SnackBar é exibido com a mensagem correta
       expect(find.byType(SnackBar), findsOneWidget);
       expect(find.text('Por favor, insira um nome'), findsOneWidget);
     });
