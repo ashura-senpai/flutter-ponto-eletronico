@@ -24,7 +24,6 @@ class _MyAppState extends State<MyApp> {
     _loadFuncionarios();
   }
 
-  // Carregar funcionários de shared_preferences
   void _loadFuncionarios() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? funcionariosJson = prefs.getString('funcionarios');
@@ -39,7 +38,6 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  // Salvar funcionários em shared_preferences
   void _saveFuncionarios() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<Map<String, dynamic>> funcionariosMap =

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'models.dart'; // Importar as classes de domínio
+import 'models.dart';
 
 class ListagemFuncionarios extends StatelessWidget {
   final List<Funcionario> funcionarios;

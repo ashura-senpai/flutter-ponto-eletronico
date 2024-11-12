@@ -13,13 +13,17 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildBaterPontoButton(context, 'Início do Dia', 'Início do Dia registrado'),
-              SizedBox(height: 20),  // Espaçamento entre os botões
-              _buildBaterPontoButton(context, 'Pausa para Almoço', 'Pausa para Almoço registrada'),
+              _buildBaterPontoButton(
+                  context, 'Início do Dia', 'Início do Dia registrado'),
               SizedBox(height: 20),
-              _buildBaterPontoButton(context, 'Volta do Almoço', 'Volta do Almoço registrada'),
+              _buildBaterPontoButton(
+                  context, 'Pausa para Almoço', 'Pausa para Almoço registrada'),
               SizedBox(height: 20),
-              _buildBaterPontoButton(context, 'Fim do Expediente', 'Fim do Expediente registrado'),
+              _buildBaterPontoButton(
+                  context, 'Volta do Almoço', 'Volta do Almoço registrada'),
+              SizedBox(height: 20),
+              _buildBaterPontoButton(
+                  context, 'Fim do Expediente', 'Fim do Expediente registrado'),
             ],
           ),
         ),
@@ -28,14 +32,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  ElevatedButton _buildBaterPontoButton(BuildContext context, String texto, String mensagem) {
+  ElevatedButton _buildBaterPontoButton(
+      BuildContext context, String texto, String mensagem) {
     return ElevatedButton(
       onPressed: () {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(mensagem)));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(mensagem)));
       },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20), // Aumenta o tamanho dos botões
-        textStyle: TextStyle(fontSize: 18), // Aumenta o tamanho do texto dos botões
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+        textStyle: TextStyle(fontSize: 18),
       ),
       child: Text(texto),
     );
